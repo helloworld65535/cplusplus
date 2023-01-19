@@ -5,6 +5,7 @@ template <class DataType>
 class ArrayList : public AbstractList<DataType>
 {
 private:
+    DataType *array;
     int capacity;
 
     void SetCapacity()
@@ -15,10 +16,10 @@ private:
             DataType *temp = new DataType[temp_capacity];
             for (int i = 0; i < AbstractList<DataType>::size; i++)
             {
-                temp[i] = AbstractList<DataType>::array[i];
+                temp[i] = array[i];
             }
-            delete[] AbstractList<DataType>::array;
-            AbstractList<DataType>::array = temp;
+            delete[] array;
+            array = temp;
             capacity = temp_capacity;
         }
         else if ((AbstractList<DataType>::size * 4) < capacity)
@@ -27,10 +28,10 @@ private:
             DataType *temp = new DataType[temp_capacity];
             for (int i = 0; i < AbstractList<DataType>::size; i++)
             {
-                temp[i] = AbstractList<DataType>::array[i];
+                temp[i] = array[i];
             }
-            delete[] AbstractList<DataType>::array;
-            AbstractList<DataType>::array = temp;
+            delete[] array;
+            array = temp;
             capacity = temp_capacity;
         }
     }
@@ -40,35 +41,25 @@ public:
     {
         AbstractList<DataType>::size = 0;
         capacity = c * 2;
-        AbstractList<DataType>::array = new DataType[capacity];
+        array = new DataType[capacity];
     }
 
     void ClearList() override
     {
-        if (AbstractList<DataType>::array)
+        if (array)
         {
-            delete[] AbstractList<DataType>::array;
+            delete[] array;
         }
         AbstractList<DataType>::size = 0;
         capacity = 20;
-        AbstractList<DataType>::array = new DataType[capacity];
-    }
-
-    bool IsEmpty() override
-    {
-        return (AbstractList<DataType>::size == 0);
-    }
-
-    int Length() override
-    {
-        return AbstractList<DataType>::size;
+        array = new DataType[capacity];
     }
 
     DataType *Get(int i) override
     {
         if (i < AbstractList<DataType>::size)
         {
-            return &AbstractList<DataType>::array[i];
+            return &array[i];
         }
         return nullptr;
     }
@@ -77,9 +68,9 @@ public:
     {
         for (int i = 0; i < AbstractList<DataType>::size; i++)
         {
-            if (Compare(AbstractList<DataType>::array[i]))
+            if (Compare(array[i]))
             {
-                return &AbstractList<DataType>::array[i];
+                return &array[i];
             }
         }
         return nullptr;
@@ -87,12 +78,12 @@ public:
 
     DataType *Prior(DataType *element) override
     {
-        if (element != AbstractList<DataType>::array)
+        if (element != array)
         {
             for (int i = 0; i < AbstractList<DataType>::size; i++)
             {
-                if ((&AbstractList<DataType>::array[i + 1]) == element)
-                    return &AbstractList<DataType>::array[i];
+                if ((&array[i + 1]) == element)
+                    return &array[i];
             }
         }
         return nullptr;
@@ -100,12 +91,12 @@ public:
 
     DataType *Next(DataType *element) override
     {
-        if (element != &AbstractList<DataType>::array[AbstractList<DataType>::size - 1])
+        if (element != &array[AbstractList<DataType>::size - 1])
         {
             for (int i = 0; i < AbstractList<DataType>::size - 1; i++)
             {
-                if ((&AbstractList<DataType>::array[i]) == element)
-                    return &AbstractList<DataType>::array[i + 1];
+                if ((&array[i]) == element)
+                    return &array[i + 1];
             }
         }
         return nullptr;
@@ -115,25 +106,25 @@ public:
     {
         if (index < 1 || index > AbstractList<DataType>::size + 1)
             return;
-        for (int i = AbstractList<DataType>::size; i > i; ++i)
+        for (int i = AbstractList<DataType>::size; i > index; i--)
         {
-            AbstractList<DataType>::array[i] = AbstractList<DataType>::array[i - 1];
+            array[i] = array[i - 1];
         }
-        AbstractList<DataType>::array[index - 1] = data;
-        AbstractList<DataType>::size++;
+        array[index - 1] = data;
+        ++AbstractList<DataType>::size;
         SetCapacity();
     }
 
     DataType Delete(int index) override
     {
         if (index < 1 || index > AbstractList<DataType>::size)
-            return NULL;
-        DataType temp = AbstractList<DataType>::array[index - 1];
+            return 0;
+        DataType temp = array[index - 1];
         for (int i = index - 1; i < AbstractList<DataType>::size; ++i)
         {
-            AbstractList<DataType>::array[i] = AbstractList<DataType>::array[i + 1];
+            array[i] = array[i + 1];
         }
-        AbstractList<DataType>::size--;
+        --AbstractList<DataType>::size;
         SetCapacity();
         return temp;
     }
@@ -142,15 +133,15 @@ public:
     {
         for (int i = 0; i < AbstractList<DataType>::size; i++)
         {
-            function(AbstractList<DataType>::array[i]);
+            function(array[i]);
         }
     }
 
     ~ArrayList() override
     {
-        if (AbstractList<DataType>::array)
+        if (array)
         {
-            delete[] AbstractList<DataType>::array;
+            delete[] array;
         }
     }
 };
