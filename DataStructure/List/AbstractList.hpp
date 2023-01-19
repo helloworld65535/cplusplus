@@ -5,7 +5,6 @@ class AbstractList
 {
 
 protected:
-    DataType *array;
     int size;
 
 public:
@@ -21,11 +20,17 @@ public:
 
     /// @brief 线性表是否为空
     /// @return 真假
-    virtual bool IsEmpty() = 0;
+    virtual bool IsEmpty()
+    {
+        return (AbstractList<DataType>::size == 0);
+    }
 
     /// @brief 返回线性表中的元素个数
     /// @return 线性表中的元素个数
-    virtual int Length() = 0;
+    virtual int Length() 
+    {
+        return AbstractList<DataType>::size;
+    }
 
     /// @brief 返回线性表中第i个数据元素的值
     /// @param i [1,length]
