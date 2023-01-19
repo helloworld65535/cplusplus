@@ -5,9 +5,16 @@
 
 #忽略所有 build 文件夹(包括其内部文件)
 **/build
+**/.idea
+**/cmake-build-debug
+
+
 
 #忽略所有 .o 结尾的文件
 *.o
 *.exe
 *.obj
 *.txt
+
+#不忽略任何 CMakeLists.txt
+!CMakeLists.txt
