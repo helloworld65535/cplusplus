@@ -14,8 +14,9 @@ int main()
     LinkedList<int> arrayList;
     for (int i = 0; i < 10; i++)
     {
-        arrayList.Insert(arrayList.Length() + 1, i);
+        arrayList.Insert((arrayList.Length() + 1), i);
     }
+    cout<<"size ="<<arrayList.Length()<<endl;
     arrayList.Traverse(Print);
     cout << endl;
     for (int i = 0; i < 4; ++i)
