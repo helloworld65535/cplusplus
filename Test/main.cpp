@@ -1,38 +1,59 @@
 #include <iostream>
-#include <unordered_map>
 
+#include <fstream> //包含头文件
 using namespace std;
-
-class Solution
+void WriteFile()
 {
-	int getNext(int n)
-	{
-		int next = 0;
-		while (n > 0)
-		{
-			int temp = (n % 10);
-			next += temp * temp;
-			n /= 10;
-		}
-		return next;
-	}
+    // 创建流对象
+    ofstream outfilestream;
+    // 指定打开方式
+    outfilestream.open("write.txt", ios::out);
+    // 写入数据
+    outfilestream << "姓名：张三" << endl;
+    outfilestream << "年龄：18" << endl;
+    outfilestream << "性别：男" << endl;
+    // 关闭流
+    outfilestream.close();
+}
+void ReadFile()
+{
+    // 创建流对象
+    ifstream infilestream;
+    // 指定打开方式
+    infilestream.open("write.txt", ios::in);
+    // 判断是否打开成功
+    if (!infilestream.is_open())
+    {
+        cout << "open file fail" << endl;
+        infilestream.close();
+        return;
+    }
 
-public:
-	bool isHappy(int n)
-	{
-		int slow = n, fast = n;
-		do
-		{
-			slow = getNext(slow);
-			fast = getNext(fast);
-			fast = getNext(fast);
-		} while (slow != fast);
-		return slow == 1;
-	}
-};
+    string buf3;
+    while (getline(infilestream, buf3))
+    {
+        cout << buf3 << endl;
+    }
+
+    /* 方法四 */
+
+    /* char buf4;
+    while ((c = infilestream.get()) != EOF)
+    {
+        cout << buf4;
+    } */
+
+    // 关闭流
+    infilestream.close();
+}
+
 
 int main(void)
 {
-
-	return 0;
+    cout<<"_______WriteFile_______"<<endl;
+    WriteFile();
+    cout<<"_______ReadFile_______"<<endl;
+    ReadFile();
+    cout << "Exit" << endl;
+    return 0;
 }
