@@ -47,7 +47,7 @@ void InsertSort::DirectInsertSort(std::vector<int> &a)
 
 void InsertSort::DirectInsertSort_Another(std::vector<int> &a)
 {
-        // 把无序部分的元素插入到有序部分
+    // 把无序部分的元素插入到有序部分
     for (std::vector<int>::size_type i = 1; i < a.size(); i++)
     {
         // 有序部分从后往前，与待插入元素比较。
@@ -71,19 +71,25 @@ void InsertSort::BinaryInsertSort(std::vector<int> &a)
 {
     // 把无序部分的元素插入到有序部分
     //  - 有序部分默认有1个
-    for (int i = 1; i < a.size(); i++)
+    for (std::vector<int>::size_type i = 1; i < a.size(); i++)
     {
+        //要插入的元素比有序部分最大还要大，则跳过
+        if (a[i] >= a[i - 1])
+        {
+            continue;
+        }
+
         // - 临时存储要插入的元素
         int element = a[i];
 
         // 在有序部分中找到该元素插入的位置
-        int insert_pos = i,left = 0, right = i - 1;
-        while (left <= right)
+        std::vector<int>::size_type insert_pos = i, left = 0, right = i - 1;
+        while (left < right)
         {
-            int mid = left + (right - left) / 2;
-            if (element < a[mid])
+            std::vector<int>::size_type mid = left + (right - left) / 2;
+            if (element <= a[mid])
             {
-                right = mid - 1;
+                right = mid;
             }
             else
             {
@@ -93,15 +99,15 @@ void InsertSort::BinaryInsertSort(std::vector<int> &a)
         insert_pos = left;
         // 进行插入操作
 
-        // - 将插入位置的之后的所有有序元素都后移一位
-        for (int j = i; j > insert_pos; j--)
+        // - 将插入位置的和之后的所有有序元素都后移一位
+        for (std::vector<int>::size_type j = i; j > insert_pos; j--)
         {
             a[j] = a[j - 1];
         }
+
         // - 将临时存储要插入的元素，赋值给插入位置
         a[insert_pos] = element;
     }
-
 }
 
 void InsertSort::operator()(std::vector<int> &a)
