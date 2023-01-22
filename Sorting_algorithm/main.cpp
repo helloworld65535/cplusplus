@@ -13,11 +13,11 @@ int main(void)
     srand(time(0));
     for (int i = 0; i < 20; i++)
     {
-        array.push_back((rand() % 201) - 100); // Ëæ»úÌí¼Ó[-100,100]·¶Î§ÄÚµÄÊı
+        array.push_back((rand() % 201) - 100); // éšæœºæ·»åŠ [-100,100]èŒƒå›´å†…çš„æ•°
     }
     if (log)
     {
-        std::cout << "ÅÅĞòÇ°£º";
+        std::cout << "æ’åºå‰ï¼š";
         std::for_each(array.begin(), array.end(), [](int i) -> void
                       { printf("%3d ", i); });
         std::cout << std::endl;
@@ -26,14 +26,14 @@ int main(void)
     std::vector<int> check_array(array);
     std::sort(check_array.std::vector<int>::begin(), check_array.std::vector<int>::end());
 
-    /* ÅÅĞò²Ù×÷ */
+    /* æ’åºæ“ä½œ */
     // InsertSort i_sort(InsertSort::Binary);
     // i_sort(array);
     InsertSort(InsertSort::Shell)(array);
 
     if (log)
     {
-        std::cout << "ÅÅĞòºó£º";
+        std::cout << "æ’åºåï¼š";
         std::for_each(array.begin(), array.end(), [](int i) -> void
                       { printf("%3d ", i); });
         std::cout << std::endl;
@@ -41,14 +41,14 @@ int main(void)
 
     if (log)
     {
-        std::cout << "  ´ğ°¸£º";
+        std::cout << "  ç­”æ¡ˆï¼š";
         std::for_each(check_array.begin(), check_array.end(), [](int i) -> void
                       { printf("%3d ", i); });
         std::cout << std::endl;
     }
     if (check_array == array)
     {
-        std::cout << "  ÕıÈ·" << std::endl;
+        std::cout << "  æ­£ç¡®" << std::endl;
     }
     // return (array == check_array);
     return 0;
