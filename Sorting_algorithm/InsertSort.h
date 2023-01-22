@@ -20,10 +20,10 @@ public:
         //直接插入排序（插入）
         Direct
     };
-    void DirectInsertSort(std::vector<int> &a);
-    void DirectInsertSort_Another(std::vector<int> &a);
-    void BinaryInsertSort(std::vector<int> &a);
-    void ShellInsertSort(std::vector<int> &a);
+   static void DirectInsertSort(std::vector<int> &a);
+   static void DirectInsertSort_Another(std::vector<int> &a);
+   static void BinaryInsertSort(std::vector<int> &a);
+   static void ShellInsertSort(std::vector<int> &a);
 
     void operator()(std::vector<int> &a);
 
