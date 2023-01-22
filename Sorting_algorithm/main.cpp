@@ -9,7 +9,6 @@
 int main(void)
 {
 
-    // SortCheck(InsertSort::BinaryInsertSort, true);
     std::vector<int> array;
     srand(time(0));
     for (int i = 0; i < 20; i++)
@@ -30,7 +29,7 @@ int main(void)
     /* ÅÅÐò²Ù×÷ */
     // InsertSort i_sort(InsertSort::Binary);
     // i_sort(array);
-    InsertSort(InsertSort::Binary)(array);
+    InsertSort(InsertSort::Shell)(array);
 
     if (log)
     {

@@ -73,7 +73,7 @@ void InsertSort::BinaryInsertSort(std::vector<int> &a)
     //  - 有序部分默认有1个
     for (std::vector<int>::size_type i = 1; i < a.size(); i++)
     {
-        //要插入的元素比有序部分最大还要大，则跳过
+        // 要插入的元素比有序部分最大还要大，则跳过
         if (a[i] >= a[i - 1])
         {
             continue;
@@ -110,10 +110,37 @@ void InsertSort::BinaryInsertSort(std::vector<int> &a)
     }
 }
 
+void InsertSort::ShellInsertSort(std::vector<int> &a)
+{
+    /* 增量减少 */
+    for (std::vector<int>::size_type gap = a.size() / 2; gap > 0; gap /= 2)
+    {
+        /* 增量分组，轮流操作  */
+        for (std::vector<int>::size_type i = gap; i < a.size(); i++)
+        {
+            /* 对每组使用直接插入排序 */
+            for (std::vector<int>::size_type j = i; j >= gap; j -= gap)
+            {
+                if (a[j] < a[j - gap])
+                {
+                    std::swap(a[j], a[j - gap]);
+                }
+                else
+                {
+                    break;
+                }
+            }
+        }
+    }
+}
+
 void InsertSort::operator()(std::vector<int> &a)
 {
     switch (Mode)
     {
+    case Shell:
+        ShellInsertSort(a);
+        break;
     case Binary:
         BinaryInsertSort(a);
         break;
