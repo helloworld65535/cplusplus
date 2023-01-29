@@ -4,6 +4,7 @@
 #include <ctime>
 // #include <cstdlib>
 #include "InsertSort.h"
+#include "SwapSort.h"
 
 #define TEST_NUMBER 10
 
@@ -14,11 +15,11 @@ bool CheckSort(void (*SortFunc)(std::vector<int> &), bool Log)
     srand((unsigned int)time(0));
     for (int i = 0; i < 20; i++)
     {
-        array.push_back((rand() % 201) - 100); // ÈöèÊú∫Ê∑ªÂä†[-100,100]ËåÉÂõ¥ÂÜÖÁöÑÊï∞
+        array.push_back((rand() % 201) - 100); // ÀÊª˙ÃÌº”[-100,100]∑∂Œßƒ⁄µƒ ˝
     }
     if (Log)
     {
-        std::cout << "ÊéíÂ∫èÂâçÔºö";
+        std::cout << "≈≈–Ú«∞£∫";
         std::for_each(array.begin(), array.end(), [](int i) -> void
                       { printf("%3d ", i); });
         std::cout << std::endl;
@@ -27,25 +28,25 @@ bool CheckSort(void (*SortFunc)(std::vector<int> &), bool Log)
     std::vector<int> check_array(array);
     std::sort(check_array.std::vector<int>::begin(), check_array.std::vector<int>::end());
 
-    /* ÊéíÂ∫èÊìç‰Ωú */
+    /* ≈≈–Ú≤Ÿ◊˜ */
     // InsertSort i_sort(InsertSort::Binary);
     // i_sort(array);
     SortFunc(array);
 
     if (Log)
     {
-        std::cout << "ÊéíÂ∫èÂêéÔºö";
+        std::cout << "≈≈–Ú∫Û£∫";
         std::for_each(array.begin(), array.end(), [](int i) -> void
                       { printf("%3d ", i); });
         std::cout << std::endl;
 
-        std::cout << "  Á≠îÊ°àÔºö";
+        std::cout << "  ¥∞∏£∫";
         std::for_each(check_array.begin(), check_array.end(), [](int i) -> void
                       { printf("%3d ", i); });
         std::cout << std::endl;
         if (check_array == array)
         {
-            std::cout << "  Ê≠£Á°Æ" << std::endl;
+            std::cout << "  ’˝»∑" << std::endl;
         }
     }
 
@@ -57,10 +58,10 @@ int main(void)
     int TestResult = 0;
     for (int i = 0; i < TEST_NUMBER; i++)
     {
-        if (CheckSort(InsertSort::ShellInsertSort, true))
+        if (CheckSort(SwapSort::BubbleSort, true))
             ++TestResult;
     }
-    std::cout << "ÊµãËØïÁªìÊûúÔºö" << TestResult << "/" << TEST_NUMBER << std::endl;
+    std::cout << "≤‚ ‘Ω·π˚£∫" << TestResult << "/" << TEST_NUMBER << std::endl;
 
     return 0;
 }
