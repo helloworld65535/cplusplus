@@ -15,13 +15,14 @@ public:
     };
 
     static void BubbleSort(std::vector<int> &a);
-    static void Quicksort(std::vector<int> &a);
+    static void QuickSort(std::vector<int> &a);
 
     void operator()(std::vector<int> &a);
     SwapSort(enum SwapSort_Mode mode = Bubble) : Mode(mode) {}
 
 private:
     enum SwapSort_Mode Mode;
+    static void QuickSortHelper(std::vector<int> &a, int left, int right);
 };
 
 #endif // SWAPSORT_H

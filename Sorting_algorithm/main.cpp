@@ -6,8 +6,6 @@
 #include "InsertSort.h"
 #include "SwapSort.h"
 
-#define TEST_NUMBER 10
-
 bool CheckSort(void (*SortFunc)(std::vector<int> &), bool Log)
 {
 
@@ -55,13 +53,8 @@ bool CheckSort(void (*SortFunc)(std::vector<int> &), bool Log)
 
 int main(void)
 {
-    int TestResult = 0;
-    for (int i = 0; i < TEST_NUMBER; i++)
-    {
-        if (CheckSort(SwapSort::BubbleSort, true))
-            ++TestResult;
-    }
-    std::cout << "测试结果：" << TestResult << "/" << TEST_NUMBER << std::endl;
+    bool TestResult = (CheckSort(SwapSort::QuickSort, true));
+    std::cout << "测试结果：" << (TestResult ? "正确" : "错误") << std::endl;
 
     return 0;
 }

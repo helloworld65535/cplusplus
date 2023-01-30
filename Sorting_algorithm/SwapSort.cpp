@@ -15,9 +15,9 @@ void SwapSort::BubbleSort(std::vector<int> &a)
     }
 }
 
-void SwapSort::Quicksort(std::vector<int> &a)
+void SwapSort::QuickSort(std::vector<int> &a)
 {
-    
+    QuickSortHelper(a, 0, a.size() - 1);
 }
 
 void SwapSort::operator()(std::vector<int> &a)
@@ -30,4 +30,28 @@ void SwapSort::operator()(std::vector<int> &a)
     default:
         break;
     }
+}
+
+void SwapSort::QuickSortHelper(std::vector<int> &a, int begin, int end)
+{
+    if(begin > end)
+        return;
+    int tmp = a[begin];
+    int i = begin;
+    int j = end;
+    while(i != j){
+        while(a[j] >= tmp && j > i)
+            j--;
+        while(a[i] <= tmp && j > i)
+            i++;
+        if(j > i){
+            int t = a[i];
+            a[i] = a[j];
+            a[j] = t;
+        }
+    }
+    a[begin] = a[i];
+    a[i] = tmp;
+    QuickSortHelper(a, begin, i-1);
+    QuickSortHelper(a, i+1, end);
 }
