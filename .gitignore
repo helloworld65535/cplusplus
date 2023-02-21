@@ -7,7 +7,7 @@
 **/build
 **/.idea
 **/cmake-build-debug
-
+**/.vscode
 
 
 #忽略所有 .o 结尾的文件
