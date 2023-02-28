@@ -1,6 +1,8 @@
 #ifndef BINARYTREE_HPP
 #define BINARYTREE_HPP
 
+#include <initializer_list>
+
 template <typename ElemType>
 struct BinaryTreeNode
 {
@@ -14,7 +16,12 @@ template <typename ElemType>
 class BinaryTree
 {
 public: /*公共*/
+    enum class CreateBTree
+    {
+        Preorder,
+    };
     BinaryTree();
+    
     ~BinaryTree();
 
     /**
@@ -64,6 +71,7 @@ BinaryTree<ElemType>::BinaryTree()
     root_ = nullptr;
     number_ = 0;
 }
+
 
 template <typename ElemType>
 BinaryTree<ElemType>::~BinaryTree()
