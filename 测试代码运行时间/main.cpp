@@ -13,5 +13,8 @@ int main()
      long f = 0;
      run_time("runing", [&]
               { f = fibonacci(42); });
+     run_time_us("runing", [&]
+                 { f = fibonacci(42); });
      std::cout << "f(42) = " << f << '\n';
+     return 0;
 }
