@@ -36,19 +36,27 @@ auto foo()
 int main(void)
 {
      auto b = foo();
-     /*
-     也可以像指针一样使用*和->
-      */
+     /* 也可以像指针一样使用*和-> */
      (*b).Print();
      /* 移动构造 */
      auto c = std::move(b);
-     c.reset(new Base); // 替换存储的指针,原指针指向内存被释放
 
-     c.release(); // 释放指针
-     c->Print();
+     c.reset(new Base); // 替换存储的指针,原指针指向内存被释放
+     if (c)             /* 判断是否有管理对象 */
+          c->Print();
+     std::cout << "=========[release]=========" << std::endl;
+     delete c.release(); // 释放被管理对象的所有权。调用方负责删除该对象。若无管理对象则返回null
 
      // auto d = c; //无法复制构造，std::unique_ptr不能被复制
-
+     auto pb = new Base();
+     std::cout << "==============================================" << std::endl;
+     auto e = std::unique_ptr<Base>(pb);
+     auto f = std::unique_ptr<Base>(pb);
+     std::cout << "==:" << (e == f) << std::endl; /* 比较拥有的指针 */
+     std::cout << ">:" << (e > f) << std::endl;
+     e.release();
+     e->Print();
+     f->Print();
      std::cout << "END" << std::endl;
 
      // 当std::unique_ptr对象被销毁时，它会自动释放它所拥有的对象
