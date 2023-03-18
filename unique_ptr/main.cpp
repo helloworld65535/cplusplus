@@ -54,3 +54,4 @@ int main(void)
      // 当std::unique_ptr对象被销毁时，它会自动释放它所拥有的对象
      return 0;
 }
+// 详见 https://en.cppreference.com/w/cpp/memory/unique_ptr
