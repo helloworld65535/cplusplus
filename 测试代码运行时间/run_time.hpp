@@ -8,7 +8,7 @@
  * @param func 传入要测试的函数
  */
 template <class Func>
-void run_time(std::string log, Func func)
+void run_time(const std::string &log, Func func)
 {
      auto start = std::chrono::steady_clock::now();
      func();
@@ -19,7 +19,7 @@ void run_time(std::string log, Func func)
                << log << ":" << elapsed_seconds.count() << "s\n";
 }
 template <class Func>
-void run_time_us(std::string log, Func func)
+void run_time_us(const std::string &log, Func func)
 {
      auto start = std::chrono::steady_clock::now();
      func();
